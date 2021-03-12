@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script>
+	$(function() {
+		$('.ui.rating').rating();
+		$('.WWpopup').popup();
+		{% if curr_page == 1 %}
+		{% if event_list %}
+			var ctx = document.getElementById("eventChart").getContext("2d");
+			var config = {
+				type: 'line',
+				data: {
+					labels: [{% for event in event_list reversed %}"{{ event.date|date:'d.m.Y' }}", {% endfor %}],
+					datasets: [
+						{
+							label: "Anzahl Teilnehmer",
+							backgroundColor: "#21ba45",
+							borderColor: "#ffe21f",
+							pointRadius: 5,
+							fill: false,
+							data: [{% for event in event_list reversed %}{{ event.get_people_count }}, {% endfor %}],
+						}
+					]
+				},
+				options: {
+					responsive: true,
+					scales: {
+						xAxes: [{
+							display: true,
+							scaleLabel: {
+								display: false,
+								labelString: 'Datum'
+							}
+						}],
+						yAxes: [{
+							display: true,
+							scaleLabel: {
+								display: false,
+								labelString: 'Anzahl Würste'
+							},
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					},
+					legend: {
+						display: false
+					}
+				}
+			};
+			var eventLineChart = new Chart(ctx, config);
+		{% endif %}
+		{% endif %}
+	});
+</script>
+{% endblock %}
+
+{% block body %}
+<h2 class="ui header">
+	<i class="food icon"></i>
+	<div class="content">
+		Weißwurst-Event Management System <small>- Statistiken</small>
+	</div>
+</h2>
+<a href="/">
+	<button class="ui labeled icon button">
+		<i class="chevron left icon"></i>
+		Startseite
+	</button>
+</a>
+<div class="ui small compact floated right pagination menu">
+	{% for number in num_pages %}
+	{% if number == curr_page %}
+	<a class="active item" href="/stats/{{ number }}">
+		{{ number }}
+	</a>
+	{% else %}
+	<a class="item" href="/stats/{{ number }}">
+		{{ number }}
+	</a>
+	{% endif %}
+	{% endfor %}
+</div>
+{% if curr_page == 1 %}
+{% if event_list %}
+<h3 class="ui top attached header" style="margin-top: 30px;">Statistiken:</h3>
+<div class="ui attached segment">
+	<canvas id="eventChart" height="50"></canvas>
+	<div class="ui divider"></div>
+	<table class="ui celled striped compact table">
+		<thead>
+			<tr>
+				<th>
+					Am häufigsten gehosted
+				</th>
+				<th style="width: 20%;">
+					Anzahl
+				</th>
+				<th style="width: 20%;">
+					Durch. Bew.:
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for host in user_host_counts %}
+			<tr>
+				<td>
+					{% if host.host.active %}{{ host.host.name }}{% else %}<span style="text-decoration: line-through;">{{ host.host.name }}</span>{% endif %}
+				</td>
+				<td>
+					{{ host.id__count }}
+				</td>
+				<td>
+					<div class="ui yellow disabled rating" data-rating="{{ host.host.get_avg_rating }}" data-max-rating="5"></div>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endif %}
+{% endif %}
+<h3 class="ui top attached header" style="margin-top: 30px;">Alle Events:</h3>
+<div class="ui attached segment">
+	{% if event_list %}
+		{% for event in event_list %}
+		<table class="ui celled striped compact table">
+			<thead>
+				<tr>
+					{% if event.is_past %}
+					<th colspan="2" style="background: #e0e1e2;">
+						<a href="/event/{{ event.id }}/">
+							{% if event.host.active %}{{ event.host.name }}{% else %}<span style="text-decoration: line-through;">{{ event.host.name }}</span>{% endif %}
+						</a>,
+						<small>{{ event.host.dep.name }}</small>
+					</th>
+					<th class="right aligned" style="width: 20%; background: #e0e1e2;">
+						<span class="ui green label">+ {{ event.get_plus_for_host }}</span>
+					</th>
+					{% else %}
+					<th colspan="2" style="background: #DCEDC8;">
+						<a href="/event/{{ event.id }}/">
+							{% if event.host.active %}{{ event.host.name }}{% else %}<span style="text-decoration: line-through;">{{ event.host.name }}</span>{% endif %}
+						</a>,
+						<small>{{ event.host.dep.name }}</small>
+					</th>
+					<th class="right aligned" style="width: 20%; background: #DCEDC8;">
+						<span class="ui green label">+ {{ event.get_plus_for_host }}</span>
+					</th>
+					{% endif %}
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						{% if event.is_past %}
+							<strong>Zeit:</strong> {{ event.date|date:"d.m.Y H:i" }}<br>
+						{% else %}
+							<i class="alarm icon WWpopup" data-content="Geplanter Event, liegt in der Zukunft"></i>
+							<strong>Zeit: {{ event.date|date:"d.m.Y H:i" }}</strong><br>
+						{% endif %}
+					</td>
+					<td style="width: 20%;"><strong>Raum:</strong> {{ event.room.name }}</td>
+					<td class="right aligned" style="width: 20%;">
+						<strong>Durch. Bew.:</strong>
+						<div class="ui yellow disabled rating" data-rating="{{ event.get_avg_rating }}" data-max-rating="5"></div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3"></td>
+				</tr>
+				{% if event.get_participants|length > 0 %}
+				{% for participant in event.get_participants %}
+				<tr>
+					<td><small>{{ participant.user.name }}</small></td>
+					<td style="width: 20%;"><small>{{ participant.sausages }} Würste</small></td>
+					<td style="width: 20%;"><small>{{ participant.bretzels }} Brezen</small></td>
+				</tr>
+				{% endfor %}
+				{% else %}
+				<tr>
+					<td colspan="3">
+						<small>Keine Teilnehmer...</small>
+					</td>
+				</tr>
+				{% endif %}
+			</tbody>
+		</table>
+		{% endfor %}
+	{% else %}
+	<p>Keine Events verfügbar.</p>
+	{% endif %}
+</div>
+<br>
+<div class="ui small compact floated right pagination menu" style="margin-bottom: 15px;">
+	{% for number in num_pages %}
+	{% if number == curr_page %}
+	<a class="active item" href="/stats/{{ number }}">
+		{{ number }}
+	</a>
+	{% else %}
+	<a class="item" href="/stats/{{ number }}">
+		{{ number }}
+	</a>
+	{% endif %}
+	{% endfor %}
+</div>
+{% endblock %}

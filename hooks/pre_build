@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Thanks to https://gist.github.com/yuhonas/21d0b4797956ecbb0717dbe9bd00beca
+
+set -xe
+
+YARN_REPO="/etc/yum.repos.d/yarn.repo"
+
+# If yarn is not detected, install it.
+if which yarn; then
+  echo "Skipping installation of yarn -- yarn already installed."
+  echo "yarn --version: `yarn --version`"
+else
+  echo "which yarn: `which yarn`"
+  echo "Yarn is not installed and accessible."
+  echo "Installing yarn..."
+
+  if [ ! -f $YARN_REPO ]; then
+    wget https://dl.yarnpkg.com/rpm/yarn.repo -O $YARN_REPO
+  
+    # Confirm that it downloaded
+    file /etc/yum.repos.d/yarn.repo
+  fi
+
+  # install yarn
+  yum install -y yarn
+  yarn --version
+
+  echo "... and finished installing yarn."
+fi
+
+yarn
+yarn build

@@ -1,0 +1,7 @@
+*.pyc
+*.swp
+*.sqlite3
+*.log
+node_modules
+WWEvents/static/dist/
+.cache

@@ -1,0 +1,17 @@
+wwtool.de {
+	root * /srv/wwtool
+	@static {
+		path /static/*
+		path /favicon.ico
+	}
+	@notstatic {
+	not {
+		path /static/*
+		path /favicon.ico
+		}
+	}
+	file_server @static {
+		hide .*
+	}
+	reverse_proxy @notstatic http://localhost:8000
+}

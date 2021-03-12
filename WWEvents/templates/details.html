@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script>
+$(function() {
+	$('.ui.rating').rating('setting', 'onRate', function(value) {
+		$("input[name="+this.id.split("_")[0]+"_rating]").val($(this).rating("get rating"));
+	});
+	$('.WWpopup').popup();
+	$('select.dropdown').dropdown();
+});
+</script>
+{% endblock %}
+
+{% block body %}
+<h2 class="ui header">
+	<i class="food icon"></i>
+	<div class="content">
+		Weißwurst-Event Management System <small>- Details</small>
+	</div>
+</h2>
+<a href="/">
+	<button class="ui labeled icon button">
+		<i class="chevron left icon"></i>
+		Startseite
+	</button>
+</a>
+{% if not event.is_past %}
+<a href="/event/{{ event.id }}/edit/">
+	<button class="ui right labeled orange icon right floated button">
+		<i class="edit icon"></i>
+		Event bearbeiten
+	</button>
+</a>
+<div class="ui info message">
+	<i class="calendar icon"></i> <a href="/event/{{ event.id }}/ics">Termin-Download im iCalendar-Format</a>.
+</div>
+{% endif %}
+<table class="ui celled striped compact table">
+	<thead>
+		<tr>
+			{% if event.is_past %}
+			<th colspan="2" style="background: #e0e1e2;">
+				{% if event.host.active %}{{ event.host.name }}{% else %}<span style="text-decoration: line-through;">{{ event.host.name }}</span>{% endif %},
+				<small>{{ event.host.dep.name }}</small>
+			</th>
+			<th class="right aligned" style="width: 20%; background: #e0e1e2;">
+				<span class="ui green label">+ {{ event.get_plus_for_host }}</span>
+			</th>
+			{% else %}
+			<th colspan="2" style="background: #DCEDC8;">
+				{% if event.host.active %}{{ event.host.name }}{% else %}<span style="text-decoration: line-through;">{{ event.host.name }}</span>{% endif %},
+				<small>{{ event.host.dep.name }}</small>
+			</th>
+			<th class="right aligned" style="width: 20%; background: #DCEDC8;">
+				<span class="ui green label">+ {{ event.get_plus_for_host }}</span>
+			</th>
+			{% endif %}
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				{% if event.is_past %}
+					<strong>Zeit:</strong> {{ event.date|date:"d.m.Y H:i" }}<br>
+					{% else %}
+					<i class="alarm icon WWpopup" data-content="Geplanter Event, liegt in der Zukunft"></i>
+					<strong>Zeit: {{ event.date|date:"d.m.Y H:i" }}</strong><br>
+				{% endif %}
+			</td>
+			<td style="width: 20%;"><strong>Raum:</strong> {{ event.room.name }}</td>
+			<td class="right aligned" style="width: 20%;">
+				<strong>Durch. Bew.:</strong>
+				<div class="ui yellow disabled rating" data-rating="{{ event.get_avg_rating }}"  data-max-rating="5"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3"></td>
+		</tr>
+		{% if event.get_participants|length > 0 %}
+		{% for participant in event.get_participants %}
+		<tr>
+			<td>
+				<form action="/event/{{ event.id }}/leave/" method="post" style="display: inline;">
+					{% csrf_token %}
+					<input type="hidden" name="participant" value="{{ participant.id }}">
+					<button class="ui mini {% if event.is_past %}grey{% else %}red{% endif %} icon button WWpopup" data-content="{{ participant.user.name }} entfernen.">
+						<i class="remove user icon"></i>
+					</button>
+				</form>
+				<small>{{ participant.user.name }}</small>
+			</td>
+			<td style="width: 20%;"><small>{{ participant.sausages }} Würste</small></td>
+			<td style="width: 20%;"><small>{{ participant.bretzels }} Brezen</small></td>
+		</tr>
+		{% endfor %}
+		{% else %}
+		<tr>
+			<td colspan="3">
+				<small>Keine Teilnehmer...</small>
+			</td>
+		</tr>
+		{% endif %}
+	</tbody>
+</table>
+<form action="/event/{{ event.id }}/join/" method="post" class="ui form">
+	{% csrf_token %}
+	<table class="ui celled striped table">
+		<thead>
+			<tr>
+				<th>
+					Teilnehmen als
+				</th>
+				<th style="width: 20%;">
+					Würste
+				</th>
+				<th style="width: 20%;">
+					Bretzen
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					{{ pform.user }}
+				</td>
+				<td style="width: 20%;">
+					{{ pform.sausages }}
+				</td>
+				<td style="width: 20%;">
+					{{ pform.bretzels }}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" class="right aligned">
+					<button class="ui button" type="submit">Abschicken</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+<div class="ui divider"></div>
+{% if event.is_past %}
+<table class="ui celled striped table">
+	<thead>
+		<tr>
+			<th style="background: #e0e1e2;">
+				Bewertungen von
+			</th>
+			<th style="width: 15%;background: #e0e1e2;">
+				Bewertung Würste
+			</th>
+			<th style="width: 15%;background: #e0e1e2;">
+				Bewertung Bretzen
+			</th>
+			<th style="width: 15%;background: #e0e1e2;">
+				Bewertung Senf
+			</th>
+			<th style="width: 15%;background: #e0e1e2;">
+				Bewertung Orga.
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% if event.get_ratings %}
+		{% for rating in event.get_ratings %}
+		<tr>
+			<td>
+				<small>{{ rating.name }}</small>
+			</td>
+			<td>
+				<div class="ui yellow disabled rating" data-rating="{{ rating.sausage_rating }}" data-max-rating="5"></div>
+			</td>
+			<td>
+				<div class="ui yellow disabled rating" data-rating="{{ rating.bretzel_rating }}" data-max-rating="5"></div>
+			</td>
+			<td>
+				<div class="ui yellow disabled rating" data-rating="{{ rating.mustard_rating }}" data-max-rating="5"></div>
+			</td>
+			<td>
+				<div class="ui yellow disabled rating" data-rating="{{ rating.orga_rating }}" data-max-rating="5"></div>
+			</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+		<tr>
+			<td colspan="5">
+				<small>Keine Bewertungen vorhanden.</small>
+			</td>
+		</tr>
+		{% endif %}
+	</tbody>
+</table>
+<form action="/event/{{ event.id }}/rate/" method="post" class="ui form">
+	{% csrf_token %}
+	<table class="ui celled striped table">
+		<thead>
+			<tr>
+				<th>
+					Bewertung abgeben als:
+				</th>
+				<th style="width: 15%;">
+					Bewertung Würste
+				</th>
+				<th style="width: 15%;">
+					Bewertung Bretzen
+				</th>
+				<th style="width: 15%;">
+					Bewertung Senf
+				</th>
+				<th style="width: 15%;">
+					Bewertung Orga.
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					{{ rform.name }}
+				</td>
+				<td>
+					<div class="ui yellow rating" data-rating="4" data-max-rating="5" id="sausage_stars"></div>
+					{{ rform.sausage_rating }}
+				</td>
+				<td>
+					<div class="ui yellow rating" data-rating="4" data-max-rating="5" id="bretzel_stars"></div>
+					{{ rform.bretzel_rating }}
+				</td>
+				<td>
+					<div class="ui yellow rating" data-rating="4" data-max-rating="5" id="mustard_stars"></div>
+					{{ rform.mustard_rating }}
+				</td>
+				<td>
+					<div class="ui yellow rating" data-rating="3" data-max-rating="5" id="orga_stars"></div>
+					{{ rform.orga_rating }}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5" class="right aligned">
+					<button class="ui button" type="submit">Abschicken</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+{% else %}
+<div class="ui warning message">
+	Noch keine Bewertung möglich.
+</div>
+<div class="ui divider"></div>
+<a href="/event/{{ event.id }}/print/">
+	<button class="ui labeled icon button">
+		<i class="print icon"></i>
+		Einkaufszettel drucken ...
+	</button>
+</a>
+{% endif %}
+{% endblock %}

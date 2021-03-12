@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script>
+$(function() {
+	$.datetimepicker.setLocale('de');
+	$('input[name=date]').datetimepicker({
+		inline: true,
+		format:'d.m.Y H:i',
+		step: 15,
+		dayOfWeekStart: 1
+	});
+	$('select.dropdown').dropdown();
+});
+</script>
+{% endblock %}
+
+{% block body %}
+<h2 class="ui header">
+	<i class="food icon"></i>
+	<div class="content">
+		{% if event %}
+		Weißwurst-Event Management System <small>- Event bearbeiten</small>
+		{% else %}
+		Weißwurst-Event Management System <small>- Event hinzufügen</small>
+		{% endif %}
+	</div>
+</h2>
+<a href="/">
+	<button class="ui labeled icon button">
+		<i class="chevron left icon"></i>
+		Startseite
+	</button>
+</a>
+	{% if event %}
+<a href="/event/{{ event.id }}/">
+	<button class="ui labeled icon button">
+		<i class="chevron left icon"></i>
+		zurück zum Event
+	</button>
+</a>
+{% endif %}
+
+<div class="ui segment">
+	<div class="ui warning message">
+		<div class="header">
+			Wichtig, bitte beachten:
+		</div>
+		<br>
+		Vom Weißwurst-Event Management System werden keine Räume gebucht und auch die Raumverfügbarkeit wird nicht geprüft.<br>
+		<strong>Hier gewählte Räume sollten vom Host vor dem Anlegen oder Ändern eines Events selbst gebucht werden, falls nötig.</strong>
+	</div>
+	<br>
+	<form action="{{ request.path }}" method="post" class="ui form">
+		{% if form.non_field_errors %}
+		<div class="ui negative message">
+			<div class="header">
+				Fehler
+			</div>
+			<p>{{ form.non_field_errors }}</p>
+		</div>
+		{% endif %}
+		{% csrf_token %}
+		<div class="fields">
+		<div class="one wide field"></div>
+		<div class="five wide field {% if form.date.errors %}error{% endif %}">
+			<label>Datum und Zeit:</label>
+			{{ form.date }}
+			{% if form.date.errors %}
+				{% for error in form.date.errors %}
+					{{ error|escape }}
+				{% endfor %}
+			{% endif %}
+		</div>
+		<div class="nine wide field" style="padding-top: 20px;">
+			<div class="field {% if form.host.errors %}error{% endif %}">
+				<label>Event hosten als:</label>
+				{{ form.host }}
+				{% if form.host.errors %}
+					{% for error in form.host.errors %}
+						{{ error|escape }}
+					{% endfor %}
+				{% endif %}
+			</div>
+			<div class="field {% if form.room.errors %}error{% endif %}">
+				<label>Raum:</label>
+				{{ form.room }}
+				{% if form.room.errors %}
+					{% for error in form.room.errors %}
+						{{ error|escape }}
+					{% endfor %}
+				{% endif %}
+			</div>
+			<div class="field" style="padding-top: 20px;">
+				<button class="ui right floated button" type="submit">Absenden</button>
+			</div>
+		</div>
+		</div>
+	</form>
+</div>
+{% endblock %}

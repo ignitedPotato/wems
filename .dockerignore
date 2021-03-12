@@ -1,0 +1,14 @@
+*.pyc
+*.swp
+*.sqlite3
+*.log
+node_modules
+.cache
+.git
+.gitignore
+*.png
+*.lock
+*.template
+Dockerfile
+.dockerignore
+hooks

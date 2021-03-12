@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+		<title>Weißwurst-Event Management System - PRINT</title>
+
+		{% load static %}
+		{% load tz %}
+		<script src="{% static 'dist/dist.js' %}"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'dist/dist.css' %}">
+
+	</head>
+	<body>
+
+		<div class="ui main text container">
+
+			<h2 class="ui center aligned small icon header">
+				<i class="circular food icon"></i>
+				<div class="content">
+					Weißwurst-Event Management System <small>- Einkaufsliste</small>
+				</div>
+			</h2>
+			<div class="ui divider"></div>
+			<h3 class="ui center aligned header">
+				<div class="content">
+					<small>Event:</small><br>
+					{{ event.date|date:"d.m.Y H:i" }}
+				</div>
+			</h3>
+			<table style="width: 100%; table-layout:fixed">
+				<tr>
+					<td>
+						<strong>Host:</strong> {{ event.host.name }}, <small>{{ event.host.dep.name }}</small>
+					</td>
+					<td style="text-align: right;">
+						<strong>Raum:</strong> {{ event.room.name }}
+					</td>
+				</tr>
+			</table>
+			<div class="ui divider"></div>
+			<div class="ui divider"></div>
+			<table class="ui very basic compact celled table" style="margin-top: 30px;">
+				<thead>
+					<th>
+						Teilnehmer
+					</th>
+					<th style="width: 20%;">
+						Würste
+					</th>
+					<th style="width: 20%;">
+						Bretzen
+					</th>
+				</thead>
+				<tbody>
+					{% if event.get_participants|length > 0 %}
+					{% for participant in event.get_participants %}
+					<tr>
+						<td>
+							<small>{{ participant.user.name }}</small>
+						</td>
+						<td style="width: 20%;"><small>{{ participant.sausages }} Würste</small></td>
+						<td style="width: 20%;"><small>{{ participant.bretzels }} Brezen</small></td>
+					</tr>
+					{% endfor %}
+					{% else %}
+					<tr>
+						<td colspan="3">
+							<small>Keine Teilnehmer...</small>
+						</td>
+					</tr>
+					{% endif %}
+				</tbody>
+			</table>
+			<div class="ui divider"></div>
+			<div class="ui divider"></div>
+			<h2 class="ui center aligned header">
+				<div class="content">
+					Bitte einkaufen:
+				</div>
+			</h2>
+			<div class="ui very relaxed horizontal list" style="margin-top: 10px;">
+				<div class="item">
+					<img class="ui mini image" src="{% static 'images/sausage.svg' %}">
+					<div class="content">
+						<span class="header"><span style="font-size:120%">{{ event.get_plus_for_host }}</span> Würste</span>
+						<div class="description">+ Würste für den Host</div>
+						<br>
+					</div>
+				</div>
+				<div class="item">
+					<img class="ui mini image" src="{% static 'images/pretzel.svg' %}">
+					<div class="content">
+						<span class="header"><span style="font-size:120%">{{ event.get_bretzels_for_host }}</span> Bretzen</span>
+						<div class="description">+ Bretzen für den Host</div>
+						<br>
+					</div>
+				</div>
+				<div class="item">
+					<img class="ui mini image" src="{% static 'images/mustard.svg' %}">
+					<div class="content">
+						{% if event.get_plus_for_host < 6 %}
+						<span class="header"><span style="font-size:120%">1</span> kleines Glas Senf</span>
+						{% elif event.get_plus_for_host < 12 %}
+						<span class="header"><span style="font-size:120%">1</span> großes Glas Senf</span>
+						{% elif event.get_plus_for_host >= 12 %}
+						<span class="header"><span style="font-size:120%">2</span> große Gläser Senf</span>
+						{% else %}
+						<span class="header">Whaaat? 0.o</span>
+						{% endif %}
+						<div class="description">Vorräte prüfen!</div>
+						<br>
+					</div>
+				</div>
+			</div>
+			<div class="ui divider"></div>
+			<div class="ui divider"></div>
+		</div>
+		<br><br>
+	</body>
+</html>

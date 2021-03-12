@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h2 class="ui header">
+	<i class="food icon"></i>
+	<div class="content">
+		Weißwurst-Event Management System <small>- Das Handbuch</small>
+	</div>
+</h2>
+<a href="/">
+	<button class="ui labeled icon button">
+		<i class="chevron left icon"></i>
+		Startseite
+	</button>
+</a>
+<h3 class="ui dividing header">
+	<a name="ablauf">
+		Der Ablauf
+	</a>
+</h3>
+Jede Weißwurstrunde läuft in etwa gleich ab.<br>
+Ein über Jahrhunderte überlieferter, bewährter und über die Jahre gereifter Brauch wird dafür immer wieder zum Leben erweckt.
+<br>Folgender Ablauf ist zu beachten:<br>
+<h4 class="ui header">1. Planen des Events</h4>
+Zunächst muss der Event geplant werden, was mit der Auswahl eines Hosts beginnt. Derjenige, der am gewählten Tag verfügbar ist und das geringste Wurst-Guthaben aufweist ist üblicherweise an der Reihe.
+Hat sich jemand bereiterklärt, kann dieser, oder auch jemand anderes in Vertretung, den Event hier im Manager <a href="/event/add">anlegen</a>. Jeder Nutzer im System erhält eine Email, die ihn auf das neue Event hinweist. Ab diesem Zeitpunkt sind Teilnehmer-Anmeldungen möglich. Jeder kann dabei jeden anmelden oder auch wieder abmelden. Die Anzahl der gewünschten Würste und Bretzen lassen sich angeben.
+<div class="ui warning message">
+	<div class="header">
+		Wichtig:
+	</div>
+	Vom Weißwurst-Event Management System werden keine Räume gebucht und auch die Raumverfügbarkeit wird nicht geprüft. Das muss vom Host manuell geschehen!
+</div>
+<h4 class="ui header">2. Einkaufen</h4>
+Am Abend vor dem Event kann der Host hier im Manager alle Anmeldungen einsehen und sich eine <strong>Einkaufsliste</strong> drucken lassen. Mit dieser kann er dann am darauf folgenden Tag einkaufen gehen. Die Liste zeigt die mindestens benötigte Anzahl an Würsten und Bretzen. Der Host muss dabei die für sich gewünschten Anzahlen hinzurechnen.<br>
+Zu guter Letzt zeigt die Liste die voraussichtlich benötigte Anzahl und Größe an Senfgläsern und erinnert damit gleichzeitig an den oft vergessenen Senfkauf!
+<h4 class="ui header">3. Der Event selbst</h4>
+Etwa 5-15 Minuten vor dem Event sollte der Host den Weißwurstkocher holen und ihn mit (bestenfalls bereits vorgeheiztem) Wasser füllen. Anschließend ist der Raum vorzubereiten. Für jeden Teilnehmer inklusive Host ist folgendes bereitzustellen:
+<ul class="ui list">
+	<li>Besteck (auch 1-2 Löffel für den Senf!) und Teller</li>
+	<li>Servietten (oder Serviettenersatz)</li>
+	<li>Weißwurstkocher mit Würsten, dazu die Bretzen und Senf (evtl. Reste im Kühlschrank bedenken)</li>
+</ul>
+Steht alles bereit, kann es losgehen!
+<h4 class="ui header">4. Nach dem Event</h4>
+Nach dem Weißwurstgenuss muss aufgeräumt werden. Das beginnt mit dem Entsorgen aller Reste und endet mit dem Reinigen des Tisches im Raum. Auch das lästige Reinigen des Weißwurstkochers ist zu erledigen. Teller und Besteck müssen in die Spülmaschine und übriger Senf in den Kühlschrank.<br><br>
+Im Nachgang bietet das Weißwurst-Event Management System ein kleines Rating-System, mit dem Würste, Bretzen, Senf und die Organisation des Hosts bewertet werden können. Jede Bewertung kann anonym oder pseudonym erfolgen.
+Alle abgegebenen Bewertungen ergeben eine durschnittliche Bewertung eines Events. Alle Bewertungen aller Events eines Nutzers ergeben dessen durchschnittliche Bewertung.
+<h3 class="ui dividing header" style="margin-top: 30px;">
+	<a name="insolvenz-o-meter">
+		Das Insolvenz-o-Meter und Guthaben-Färbung
+	</a>
+</h3>
+Auf der Startseite befinden sich drei verschiedene Arten von Smileys neben Nutzern. Das sind ihre Bedeutungen:<br>
+<ul class="ui list"
+	<li><i class="large green smile icon"></i> - Der User hat in den letzten 6 Monaten gehostet UND hat ein Guthaben von 0 oder mehr.</li>
+	<li><i class="large red frown icon"></i> - Der User hat in in den letzten 6 Monaten NICHT, ODER NOCH NIE, gehostet UND hat ein Guthaben von -1 oder weniger.</li>
+	<li><i class="large grey meh icon"></i> - Alle anderen Fälle, also:
+		<ul>
+			<li>Der User hat in den letzten 6 Monaten NICHT, ODER NOCH NIE, gehostet UND hat ein Guthaben von 0 oder mehr.</li>
+			<li>ODER: Der User hat in den letzten 6 Monaten gehostet UND hat ein Guthaben von -1 oder weniger.</li>
+		</ul>
+	</li>
+</ul>
+Die Guthabenfarben ändern sich dagegen rein nach Guthaben:
+<ul class="ui list">
+	<li><a class="ui red label">?</a> - Guthaben ist -10 oder weniger.</li>
+	<li><a class="ui orange label">?</a> - Guthaben ist zwischen -5 und -9.</li>
+	<li><a class="ui yellow label">?</a> - Guthaben ist zwischen -1 und -4.</li>
+	<li><a class="ui label">?</a> - Guthaben ist 0 oder mehr.</li>
+</ul>
+{% endblock %}

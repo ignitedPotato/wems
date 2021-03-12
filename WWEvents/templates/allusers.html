@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script>
+$(function() {
+	$('.ui.rating').rating();
+	$('.WWpopup').popup();
+});
+</script>
+{% endblock %}
+
+{% block body %}
+<h2 class="ui header">
+	<i class="food icon"></i>
+	<div class="content">
+		Weißwurst-Event Management System <small>- Nutzübersicht</small>
+	</div>
+</h2>
+<a href="/">
+	<button class="ui labeled icon button">
+		<i class="chevron left icon"></i>
+		Startseite
+	</button>
+</a>
+
+<table class="ui celled striped compact table">
+	<thead>
+		<tr>
+			<th>
+				Als nächstes an der Reihe
+			</th>
+			<th style="width: 20%">
+				Zuletzt gehostet
+			</th>
+			<th style="width: 15%">
+				Durch. Bew.
+			</th>
+			<th style="width: 15%">
+				Insolvenz-o-meter
+			</th>
+			<th style="width: 10%">
+				Guthaben
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for user in user_list %}
+		<tr>
+			<td>
+				{% if user == user_list|first %}
+					<i class="red child icon"></i>
+				{% else %}
+					<i class="user icon"></i>
+				{% endif %}
+				{% if user.active %}{{ user.name }}{% else %}<span style="text-decoration: line-through;">{{ user.name }}</span>{% endif %}
+			</td>
+			<td width="20%">
+				{{ user.get_last_host_date }}
+			</td>
+			<td width="15%">
+				<div class="ui yellow disabled rating" data-rating="{{ user.get_avg_rating }}" data-max-rating="5"></div>
+			</td>
+			<td width="15%">
+				<a href="/docs#insolvenz-o-meter"><i class="large {{ user.get_mood }} icon WWpopup" data-content="Insolvenz-o-meter: Smiley klicken für mehr Infos."></i></a>
+			</td>
+			<td width="10%">
+				{% if user.get_user_standing <= -10 %}
+				<a class="ui red label" href="/docs#insolvenz-o-meter">{{ user.get_user_standing }}</a>
+				{% elif user.get_user_standing <= -5 %}
+				<a class="ui orange label" href="/docs#insolvenz-o-meter">{{ user.get_user_standing }}</a>
+				{% elif user.get_user_standing < 0 %}
+				<a class="ui yellow label" href="/docs#insolvenz-o-meter">{{ user.get_user_standing }}</a>
+				{% else %}
+				<a class="ui label" href="/docs#insolvenz-o-meter">{{ user.get_user_standing }}</a>
+				{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

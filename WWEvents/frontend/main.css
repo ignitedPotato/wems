@@ -1,0 +1,23 @@
+
+#header-stripe {
+	background: url('header-stripe.jpg') center / cover;
+	min-height: 50px;
+	border-bottom: 5px solid #566619;
+	margin-bottom: 20px;
+}
+
+#footer-stripe {
+	min-height: 5px;
+	background-color: #566619;
+	margin-bottom: 10px;
+}
+
+.Site {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+.Site-content {
+	flex: 1;
+}

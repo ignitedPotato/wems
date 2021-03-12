@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script>
+	$(function() {
+		$('.ui.rating').rating();
+		$('.WWpopup').popup();
+	});
+</script>
+{% endblock %}
+
+{% block body %}
+<h2 class="ui header">
+	<i class="food icon"></i>
+	<div class="content">
+		Weißwurst-Event Management System <small>- Startseite</small>
+	</div>
+</h2>
+<div class="ui positive message">
+	<h4 class="ui header">Willkommen, Weißwurstgenießer!</h4>
+	<p>
+		Diese Seite bildet den Treffpunkt unserer regelmäßigen Zusammenkunft. Ihr findet hier die Möglichkeit zum Erstellen eines neuen Events, zur Teilnahme an einem bereits bestehenden Event und allerlei sonstige Tools, die euch das Senf-verzierte Leben erleichtern.
+	</p>
+</div>
+<h3 class="ui top attached header">Die aktuellsten 4 Events:</h3>
+<div class="ui attached segment">
+	{% if latest_event_list %}
+	<div class="ui stackable four cards">
+		<br>
+		{% for event in latest_event_list %}
+			{% if event.is_past %}
+			<div class="ui card" style="overflow:hidden;">
+			{% else %}
+			<div class="ui card" style="background: #DCEDC8; overflow:hidden;">
+			{% endif %}
+				<div class="content">
+					<div class="ui green right corner label" style="padding-left: 10px; padding-top: 3px;">
+						+{{ event.get_plus_for_host }}
+					</div>
+					<div class="header">
+						<a href="/event/{{ event.id }}/">
+							{% if event.host.active %}{{ event.host.name }}{% else %}<span style="text-decoration: line-through;">{{ event.host.name }}</span>{% endif %}
+						</a>
+					</div>
+					<div class="meta">
+						Abteilung: {{ event.host.dep.name }}
+					</div>
+					<div class="description">
+						{% if event.is_past %}
+							Zeit: {{ event.date|date:"d.m.Y H:i" }}<br>
+						{% else %}
+							<i class="alarm icon WWpopup" data-content="Geplanter Event, liegt in der Zukunft"></i>
+							<strong>Zeit: {{ event.date|date:"d.m.Y H:i" }}</strong><br>
+						{% endif %}
+						Raum: {{ event.room.name }}
+					</div>
+				</div>
+				{% if event.is_past %}
+				<div class="extra">
+					Durch. Bewertung:
+					<div class="ui yellow disabled rating" data-rating="{{ event.get_avg_rating }}" data-max-rating="5"></div>
+				</div>
+				{% else %}
+				<div class="extra content">
+					Noch keine Bewertung möglich.
+				</div>
+				{% endif %}
+			</div>
+			{% endfor %}
+		</div>
+	{% else %}
+	<p>Keine Events verfügbar.</p>
+	{% endif %}
+</div>
+<div class="ui labeled icon fluid stackable four item menu">
+	<a class="item" href="event/add/"><i class="add circle icon"></i> Neues Event</a>
+	<a class="item" href="stats/1"><i class="bar chart icon"></i> Alle Events</a>
+	<a class="item" href="users/"><i class="users icon"></i> Alle Nutzer</a>
+	<a class="item" href="docs/"><i class="book icon"></i> Anleitung</a>
+</div>
+<h3 class="ui top attached header">Als nächstes an der Reihe:</h3>
+<div class="ui attached segment">
+	<div class="ui relaxed celled list">
+		{% for user in user_list %}
+		<div class="item">
+			<div class="right floated content">
+				<a href="/docs#insolvenz-o-meter"><i class="large {{ user.get_mood }} icon WWpopup" data-content="Insolvenz-o-meter: Smiley klicken für mehr Infos."></i></a>
+				{% if user.get_user_standing <= -10 %}
+				<a class="ui red label" href="/docs#insolvenz-o-meter">{{ user.get_user_standing }}</a>
+				{% elif user.get_user_standing <= -5 %}
+				<a class="ui orange label" href="/docs#insolvenz-o-meter">{{ user.get_user_standing }}</a>
+				{% elif user.get_user_standing < 0 %}
+				<a class="ui yellow label" href="/docs#insolvenz-o-meter">{{ user.get_user_standing }}</a>
+				{% else %}
+				<a class="ui label" href="/docs#insolvenz-o-meter">{{ user.get_user_standing }}</a>
+				{% endif %}
+			</div>
+			{% if user == user_list|first %}
+				<i class="large red middle aligned child icon"></i>
+			{% else %}
+				<i class="large middle aligned user icon"></i>
+			{% endif %}
+			<div class="content">
+				{% if user.active %}
+				<span class="header"><strong>{{ user.name }}</strong></span>
+				{% else %}
+				<span class="header" style="text-decoration: line-through;"><strong>{{ user.name }}</strong></span>
+				{% endif %}
+				<div class="description">
+					Zuletzt gehostet: {{ user.get_last_host_date }}
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+
+{% endblock %}

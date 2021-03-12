@@ -1,0 +1,16 @@
+{
+  "name": "WeissWurstTool",
+  "version": "1.0.0",
+  "author": "Maximilian Gutwein <weisswurst@randombit.eu>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "fomantic-ui-css": "^2.8.7",
+    "chart.js": "^2.9.4",
+    "jquery-datetimepicker": "^2.5.21",
+    "parcel-bundler": "1.12.3"
+  },
+  "scripts": {
+    "build": "parcel build ./WWEvents/frontend/parcel-entry.js -d ./WWEvents/static/dist/ --out-file dist --no-source-maps --no-cache --public-url /static/dist/"
+  }
+}
