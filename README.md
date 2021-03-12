@@ -12,7 +12,7 @@ In einer schicken, schlanken Web-UI können du und deine Kollegen Weißwurst-Eve
 [![Screenshot 3](https://raw.githubusercontent.com/ignitedPotato/wems/main/screenshot3_thumb.png)](https://raw.githubusercontent.com/ignitedPotato/wems/main/screenshot3.png)
 [![Screenshot 2](https://raw.githubusercontent.com/ignitedPotato/wems/main/screenshot2_thumb.png)](https://raw.githubusercontent.com/ignitedPotato/wems/main/screenshot2.png)
 
-Um die Verwaltung so einfach wie möglich zu halten, gibt es kein Berechtigungskonzept. Jeder kann für jeden alles eintragen. Nur das Löschen von Events, Teilnahmen und Bewertungen und die Anlage von Benutzern, Abteilungen und Räumen ist einem Admin überlassen, der Zugriff auf das Admininterface erhält.
+Um die Verwaltung so einfach wie möglich zu halten, gibt es kein Berechtigungskonzept. Jeder kann für jeden alles eintragen. Nur das Löschen von Events und Bewertungen und die Anlage von Benutzern, Abteilungen und Räumen ist einem Admin überlassen, der Zugriff auf das Admininterface erhält.
 
 ### Setup
 #### docker-compose
@@ -101,10 +101,6 @@ Das Weißwurst-Event Management System ist im Anschluss unter der Adresse http:/
 
 #### Docker
 ```bash
-# Prepare
-yarn
-yarn build
-
 # Build
 docker build -t wwtool .
 
