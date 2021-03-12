@@ -2,7 +2,7 @@ FROM python:latest
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends sqlite3 \
-	&& apt-get clean \
+	&& apt-get clean -y \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt ./
@@ -21,7 +21,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 	&& rm -rf node_modules \
 	&& apt-get remove -y nodejs yarn \
 	&& apt-get autoremove -y \
-	&& apt-get clean \
+	&& apt-get clean -y \
 	&& rm -rf /var/lib/apt/lists/*
 
 VOLUME /app/static

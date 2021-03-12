@@ -8,9 +8,9 @@ Wer kennt sie nicht: die langen, langen Excel-Tabellen zur Berechnung des nächs
 Das Django-basierte Weißwurst-Event Management System (kurz WEMS) löst ab sofort all deine Probleme!  
 In einer schicken, schlanken Web-UI können du und deine Kollegen Weißwurst-Events eintragen, Teilnahmen protokollieren, den Senf bewerten und automagisch E-Mails erhalten, sobald der nächste dran ist (ja, natürlich mit Fingerzeig!).
 
-[![Screenshot 1](screenshot1_thumb.png)](screenshot1.png)
-[![Screenshot 3](screenshot3_thumb.png)](screenshot3.png)
-[![Screenshot 2](screenshot2_thumb.png)](screenshot2.png)
+[![Screenshot 1](https://github.com/ignitedPotato/wems/raw/main/screenshot1_thumb.png)](https://raw.githubusercontent.com/ignitedPotato/wems/main/screenshot1.png)
+[![Screenshot 3](https://github.com/ignitedPotato/wems/raw/main/screenshot3_thumb.png)](https://raw.githubusercontent.com/ignitedPotato/wems/main/screenshot3.png)
+[![Screenshot 2](https://github.com/ignitedPotato/wems/raw/main/screenshot2_thumb.png)](https://raw.githubusercontent.com/ignitedPotato/wems/main/screenshot2.png)
 
 Um die Verwaltung so einfach wie möglich zu halten, gibt es kein Berechtigungskonzept. Jeder kann für jeden alles eintragen. Nur das Löschen von Events, Teilnahmen und Bewertungen und die Anlage von Benutzern, Abteilungen und Räumen ist einem Admin überlassen, der Zugriff auf das Admininterface erhält.
 
