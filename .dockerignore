@@ -1,7 +1,7 @@
-*.pyc
-*.swp
-*.sqlite3
-*.log
+**/__pycache__
+**/*.pyc
+**/*.sqlite3
+**/*.log
 node_modules
 .cache
 .git
@@ -11,4 +11,3 @@ node_modules
 *.template
 Dockerfile
 .dockerignore
-hooks
