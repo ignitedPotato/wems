@@ -21,7 +21,7 @@ version: "3"
 
 services:
   wwtool:
-    image: ignitedpotato/wems:dev
+    image: ignitedpotato/wems
     volumes:
       - ./static:/app/static
       - ./db:/app/db
