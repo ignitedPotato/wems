@@ -19,6 +19,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 	&& yarn build \
 	&& rm -f yarn.lock \
 	&& rm -rf node_modules \
+	&& rm -rf /usr/local/share/.cache \
 	&& apt-get remove -y nodejs yarn \
 	&& apt-get autoremove -y \
 	&& apt-get clean -y \
