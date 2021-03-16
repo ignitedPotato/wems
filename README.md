@@ -15,6 +15,9 @@ In einer schicken, schlanken Web-UI können du und deine Kollegen Weißwurst-Eve
 Um die Verwaltung so einfach wie möglich zu halten, gibt es kein Berechtigungskonzept. Jeder kann für jeden alles eintragen. Nur das Löschen von Events und Bewertungen und die Anlage von Benutzern, Abteilungen und Räumen ist einem Admin überlassen, der Zugriff auf das Admininterface erhält.
 
 ### Setup
+
+[🐳 Docker Hub](https://hub.docker.com/r/ignitedpotato/wems)
+
 #### docker-compose
 ```yaml
 version: "3"
@@ -29,7 +32,8 @@ services:
       - "127.0.0.1:8000:8000"
     environment:
       - SECRET_KEY=<insert_key_here>
-      - WWEMS_URL="http://localhost:8000"
+      - WWEMS_URL=http://localhost:8000
+      - USE_X_FORWARDED_HOST=True
     restart: always
 ```
 
@@ -55,13 +59,16 @@ Hier ein Beispiel, das stündlich (jeweils 5 Minuten nach der vollen Stunde) pr�
 ### Konfiguration
 #### ENV-Variablen
 * `DEBUG`: Aktiviert den Debugmodus und ermöglicht das direkte Hosten mittels `python manage.py runserver`
-* `SECRET_KEY`: Muss gesetzt werden, dient der Absicherung von Admin-Sitzungen
+* `SECRET_KEY`: Muss gesetzt werden, dient der Absicherung von Admin-Sitzungen, Details siehe [hier](https://docs.djangoproject.com/en/3.0/ref/settings/#secret-key)
 * `WWEMS_URL`: Vollständige öffentliche URL des Systems (z. B. `https://wwtool.test.de/ww`); wird in Emails verwendet und zum Festlegen der ALLOWED_HOSTS
-* `USE_X_FORWARDED_HOST`: Nutze `X-Forwarded-Host`-Header anstelle dem `Host`-Header zur Prüfung der ALLOWED_HOSTS
+* `USE_X_FORWARDED_HOST`: Nutze `X-Forwarded-Host`-Header anstelle dem `Host`-Header zur Prüfung der ALLOWED_HOSTS, z. B. bei Verwendung eines Reverse Proxies
 
 #### E-Mail
 Für den Versand von E-Mails existieren die Variablen, die Django zum Mailversand nutzt:
 https://docs.djangoproject.com/en/3.1/topics/email/#smtp-backend
+
+Zusätzlich:
+* `EMAIL_FROM`: E-Mail-Adresse von der aus verschickt wird
 
 
 ### Entwicklung

@@ -2,6 +2,6 @@ wwtool.de {
 	root /srv/wwtool
 	proxy / http://localhost:8000 {
 	transparent
-		except /static /media /favicon.ico
+		except /static /favicon.ico
 	}
 }
