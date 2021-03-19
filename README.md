@@ -1,6 +1,8 @@
 > ⚠ **Warning:** This README is kept in German because the Weißwurst-Event Management System (WEMS) is meant for a German-speaking audience only. Now that I think about it, it isn't even meant for all German-speakers. Please consult [Weißwurstäquator](https://en.wikipedia.org/wiki/Wei%C3%9Fwurst%C3%A4quator) for more information and to check if this software is applicable in your region.
 
-## Weißwurst-Event Management System (WEMS)
+<img src="https://raw.githubusercontent.com/ignitedPotato/wems/main/wems2.svg" width="200">
+
+## Weißwurst-Event Management System
 ### Einfach zu bedienende Webanwendung zur Verwaltung von Weißwurst-Events bzw. -Treffen.
 
 Wer kennt sie nicht: die langen, langen Excel-Tabellen zur Berechnung des nächsten Weißwurstkönigs. Blickt da überhaupt noch jemand durch? Und: Wo ist da eigentlich die Management-Summary dazu?
@@ -13,6 +15,9 @@ In einer schicken, schlanken Web-UI können du und deine Kollegen Weißwurst-Eve
 [![Screenshot 2](https://raw.githubusercontent.com/ignitedPotato/wems/main/screenshot2_thumb.png)](https://raw.githubusercontent.com/ignitedPotato/wems/main/screenshot2.png)
 
 Um die Verwaltung so einfach wie möglich zu halten, gibt es kein Berechtigungskonzept. Jeder kann für jeden alles eintragen. Nur das Löschen von Events und Bewertungen und die Anlage von Benutzern, Abteilungen und Räumen ist einem Admin überlassen, der Zugriff auf das Admininterface erhält.
+
+### Demo
+[🕹 Demo](https://demo.weisswurst.cloud) (wird nächtlich zurückgesetzt)
 
 ### Setup
 
@@ -48,6 +53,8 @@ docker-compose exec wwtool python manage.py createsuperuser
 #### Static Files
 Static files müssen von einem Reverse-Proxy ausgeliefert werden. Dieser muss also entsprechend konfiguriert werden.
 Im Repository liegen Beispielkonfigurationen für Caddy v1 und v2.
+
+Die favicon.ico muss (wenn für ältere Browser erwünscht) manuell oberhalb von /static abgelegt werden.
 
 #### Cron-Jobs
 Damit das Weißwurst-Event Management System automatisch Erinnerungsmails verschickt, muss ein Cron-Job eingerichtet werden.  
