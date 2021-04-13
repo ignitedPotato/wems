@@ -43,7 +43,7 @@
 						</a>
 					</div>
 					<div class="meta">
-						Abteilung: {{ event.host.dep.name }}
+						Abteilung: {% if event.host.dep.active %}{{ event.host.dep.name }}{% else %}<span style="text-decoration: line-through;">{{ event.host.dep.name }}</span>{% endif %}
 					</div>
 					<div class="description">
 						{% if event.is_past %}
@@ -52,7 +52,7 @@
 							<i class="alarm icon WWpopup" data-content="Geplanter Event, liegt in der Zukunft"></i>
 							<strong>Zeit: {{ event.date|date:"d.m.Y H:i" }}</strong><br>
 						{% endif %}
-						Raum: {{ event.room.name }}
+						Raum: {% if event.room.active %}{{ event.room.name }}{% else %}<span style="text-decoration: line-through;">{{ event.room.name }}</span>{% endif %}
 					</div>
 				</div>
 				{% if event.is_past %}

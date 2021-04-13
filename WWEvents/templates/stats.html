@@ -133,7 +133,7 @@
 						<a href="/event/{{ event.id }}/">
 							{% if event.host.active %}{{ event.host.name }}{% else %}<span style="text-decoration: line-through;">{{ event.host.name }}</span>{% endif %}
 						</a>,
-						<small>{{ event.host.dep.name }}</small>
+						<small>{% if event.host.dep.active %}{{ event.host.dep.name }}{% else %}<span style="text-decoration: line-through;">{{ event.host.dep.name }}</span>{% endif %}</small>
 					</th>
 					<th class="right aligned" style="width: 20%; background: #e0e1e2;">
 						<span class="ui green label">+ {{ event.get_plus_for_host }}</span>
@@ -143,7 +143,7 @@
 						<a href="/event/{{ event.id }}/">
 							{% if event.host.active %}{{ event.host.name }}{% else %}<span style="text-decoration: line-through;">{{ event.host.name }}</span>{% endif %}
 						</a>,
-						<small>{{ event.host.dep.name }}</small>
+						<small>{% if event.host.dep.active %}{{ event.host.dep.name }}{% else %}<span style="text-decoration: line-through;">{{ event.host.dep.name }}</span>{% endif %}</small>
 					</th>
 					<th class="right aligned" style="width: 20%; background: #DCEDC8;">
 						<span class="ui green label">+ {{ event.get_plus_for_host }}</span>
@@ -161,7 +161,7 @@
 							<strong>Zeit: {{ event.date|date:"d.m.Y H:i" }}</strong><br>
 						{% endif %}
 					</td>
-					<td style="width: 20%;"><strong>Raum:</strong> {{ event.room.name }}</td>
+					<td style="width: 20%;"><strong>Raum:</strong> {% if event.room.active %}{{ event.room.name }}{% else %}<span style="text-decoration: line-through;">{{ event.room.name }}</span>{% endif %}</td>
 					<td class="right aligned" style="width: 20%;">
 						<strong>Durch. Bew.:</strong>
 						<div class="ui yellow disabled rating" data-rating="{{ event.get_avg_rating }}" data-max-rating="5"></div>
@@ -173,7 +173,7 @@
 				{% if event.get_participants|length > 0 %}
 				{% for participant in event.get_participants %}
 				<tr>
-					<td><small>{{ participant.user.name }}</small></td>
+					<td><small>{% if participant.user.active %}{{ participant.user.name }}{% else %}<span style="text-decoration: line-through;">{{ participant.user.name }}</span>{% endif %}</small></td>
 					<td style="width: 20%;"><small>{{ participant.sausages }} Würste</small></td>
 					<td style="width: 20%;"><small>{{ participant.bretzels }} Brezen</small></td>
 				</tr>

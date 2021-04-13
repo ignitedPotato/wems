@@ -2,6 +2,12 @@ from django.forms import ModelForm, DateTimeInput, Select, NumberInput, HiddenIn
 from .models import *
 
 class EventForm(ModelForm):
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['host'].queryset = User.objects.filter(active=True)
+		self.fields['room'].queryset = Room.objects.filter(active=True)
+
 	class Meta:
 		model = Event
 		fields = ['date', 'host', 'room']
@@ -12,6 +18,11 @@ class EventForm(ModelForm):
 		}
 
 class ParticipantForm(ModelForm):
+
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['user'].queryset = User.objects.filter(active=True)
+
 	class Meta:
 		model = EventParticipant
 		fields = ['user', 'sausages', 'bretzels']
