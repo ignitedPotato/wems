@@ -8,9 +8,19 @@
     "fomantic-ui-css": "^2.8.7",
     "jquery": "^3.6.0",
     "jquery-datetimepicker": "^2.5.21",
-    "parcel-bundler": "^1.12.3"
+    "parcel": "^2.0.0-beta.3.1"
+  },
+  "wems": "WWEvents/static/dist/dist.js",
+  "targets": {
+    "wems": {
+      "context": "browser",
+      "includeNodeModules": true,
+      "publicUrl": "/static/dist/",
+      "isLibrary": false,
+      "sourceMap": false
+    }
   },
   "scripts": {
-    "build": "parcel build ./WWEvents/frontend/parcel-entry.js -d ./WWEvents/static/dist/ --out-file dist --no-source-maps --no-cache --public-url /static/dist/"
+    "build": "parcel build ./WWEvents/frontend/parcel-entry.js --target wems && rm -rf .parcel-cache"
   }
 }

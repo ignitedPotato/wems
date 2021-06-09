@@ -5,3 +5,4 @@
 node_modules
 WWEvents/static/dist/
 .cache
+.parcel-cache
