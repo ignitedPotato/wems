@@ -116,13 +116,13 @@ Das Weißwurst-Event Management System ist im Anschluss unter der Adresse http:/
 #### Docker
 ```bash
 # Build
-docker build -t wwtool .
+docker build -t wems .
 
 # Run
-docker run -d -p 127.0.0.1:8000:8000 --name wwtool --restart always -v /srv/static:/app/static -v /srv/db:/app/db -e SECRET_KEY=<insert_key_here> -e WWEMS_URL="http://localhost:8000" wwtool:latest
+docker run -d -p 127.0.0.1:8000:8000 --name wems --restart always -v /srv/static:/app/static -v /srv/db:/app/db -e SECRET_KEY=<insert_key_here> -e WWEMS_URL="http://localhost:8000" wems:latest
 
 # Create superuser
-docker exec -it wwtool python manage.py createsuperuser
+docker exec -it wems python manage.py createsuperuser
 ```
 
 #### settings.py
