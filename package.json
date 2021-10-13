@@ -8,7 +8,7 @@
     "fomantic-ui-css": "^2.8.8",
     "jquery": "^3.6.0",
     "jquery-datetimepicker": "^2.5.21",
-    "parcel": "^2.0.0-rc.0"
+    "parcel": "^2.0.0"
   },
   "wems": "WWEvents/static/dist/dist.js",
   "targets": {
