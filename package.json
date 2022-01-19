@@ -8,7 +8,7 @@
     "fomantic-ui-css": "^2.8.8",
     "jquery": "^3.6.0",
     "jquery-datetimepicker": "^2.5.21",
-    "parcel": "^2.0.1"
+    "parcel": "^2.2.1"
   },
   "wems": "WWEvents/static/dist/dist.js",
   "targets": {
@@ -22,8 +22,5 @@
   },
   "scripts": {
     "build": "parcel build ./WWEvents/frontend/parcel-entry.js --target wems && rm -rf .parcel-cache"
-  },
-  "devDependencies": {
-    "@parcel/transformer-image": "2.0.1"
   }
 }
