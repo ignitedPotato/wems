@@ -5,10 +5,10 @@
   "license": "GPL-3.0",
   "dependencies": {
     "chart.js": "^2.9.4",
-    "fomantic-ui-css": "^2.8.8",
+    "fomantic-ui": "nightly",
     "jquery": "^3.6.0",
     "jquery-datetimepicker": "^2.5.21",
-    "parcel": "^2.3.2"
+    "parcel": "^2.6.0"
   },
   "wems": "WWEvents/static/dist/dist.js",
   "targets": {
