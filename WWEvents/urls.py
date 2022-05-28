@@ -1,18 +1,18 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 urlpatterns = [
-	url(r'^$', views.index, name='index'),
-	url(r'^event/(?P<event_id>[0-9]+)/$', views.details, name="details"),
-	url(r'^event/(?P<event_id>[0-9]+)/join/$', views.addparticipant, name="addparticipant"),
-	url(r'^event/(?P<event_id>[0-9]+)/leave/$', views.removeparticipant, name="removeparticipant"),
-	url(r'^event/(?P<event_id>[0-9]+)/rate/$', views.rateevent, name="rateevent"),
-	url(r'^event/(?P<event_id>[0-9]+)/print/$', views.printevent, name="printevent"),
-	url(r'^event/(?P<event_id>[0-9]+)/edit/$', views.editevent, name="editevent"),
-	url(r'^event/add/$', views.addevent, name="addevent"),
-	url(r'^stats/(?P<page>[0-9]+)/$', views.stats, name="stats"),
-	url(r'^docs/$', views.docs, name="docs"),
-	url(r'^users/$', views.allusers, name="allusers"),
-	url(r'^event/(?P<event_id>[0-9]+)/ics/$', views.ics, name="ics"),
+	path(r'', views.index, name='index'),
+	path(r'event/<int:event_id>/', views.details, name="details"),
+	path(r'event/<int:event_id>/join/', views.addparticipant, name="addparticipant"),
+	path(r'event/<int:event_id>/leave/', views.removeparticipant, name="removeparticipant"),
+	path(r'event/<int:event_id>/rate/', views.rateevent, name="rateevent"),
+	path(r'event/<int:event_id>/print/', views.printevent, name="printevent"),
+	path(r'event/<int:event_id>/edit/', views.editevent, name="editevent"),
+	path(r'event/add/', views.addevent, name="addevent"),
+	path(r'stats/<int:page>/', views.stats, name="stats"),
+	path(r'docs/', views.docs, name="docs"),
+	path(r'users/', views.allusers, name="allusers"),
+	path(r'event/<int:event_id>/ics/', views.ics, name="ics"),
 ]
