@@ -42,6 +42,7 @@ USE_X_FORWARDED_HOST = env('USE_X_FORWARDED_HOST')
 from urllib.parse import urlparse
 domain = urlparse(WWEMS_URL).netloc
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', domain]
+CSRF_TRUSTED_ORIGINS = [WWEMS_URL]
 
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_PORT = env('EMAIL_PORT')
