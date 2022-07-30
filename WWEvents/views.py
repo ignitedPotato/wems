@@ -38,7 +38,7 @@ def addparticipant(request, event_id):
 				p.save()
 			except Exception as err:
 				raise err
-	return HttpResponseRedirect("/event/"+event_id+"/")
+	return HttpResponseRedirect("/event/"+str(event_id)+"/")
 
 def removeparticipant(request, event_id):
 	if request.method == 'POST':
@@ -50,7 +50,7 @@ def removeparticipant(request, event_id):
 			p.delete()
 		except Exception as err:
 			raise err
-	return HttpResponseRedirect("/event/"+event_id+"/")
+	return HttpResponseRedirect("/event/"+str(event_id)+"/")
 
 def rateevent(request, event_id):
 	if request.method == 'POST':
@@ -64,7 +64,7 @@ def rateevent(request, event_id):
 					r.save()
 			except Exception as err:
 				raise err
-	return HttpResponseRedirect("/event/"+event_id+"/")
+	return HttpResponseRedirect("/event/"+str(event_id)+"/")
 
 def printevent(request, event_id):
 	try:

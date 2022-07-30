@@ -4,23 +4,13 @@
   "author": "Maximilian Gutwein <weisswurst@randombit.eu>",
   "license": "GPL-3.0",
   "dependencies": {
-    "chart.js": "^2.9.4",
+    "chart.js": "^3.8.2",
     "fomantic-ui": "nightly",
     "jquery": "^3.6.0",
     "jquery-datetimepicker": "^2.5.21",
-    "parcel": "^2.6.2"
-  },
-  "wems": "WWEvents/static/dist/dist.js",
-  "targets": {
-    "wems": {
-      "context": "browser",
-      "includeNodeModules": true,
-      "publicUrl": "/static/dist/",
-      "isLibrary": false,
-      "sourceMap": false
-    }
+    "esbuild": "latest"
   },
   "scripts": {
-    "build": "parcel build ./WWEvents/frontend/parcel-entry.js --target wems && rm -rf .parcel-cache"
+    "build": "esbuild ./WWEvents/frontend/dist.js --bundle --minify --loader:.jpg=file --loader:.eot=file --loader:.woff=file --loader:.woff2=file --loader:.svg=file --loader:.ttf=file --outdir=WWEvents/static/dist" 
   }
 }

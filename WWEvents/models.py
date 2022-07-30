@@ -117,7 +117,8 @@ class Event(models.Model):
 
 	@property
 	def get_people_count(self):
-		return EventParticipant.objects.filter(event=self).count()+1
+		count = EventParticipant.objects.filter(event=self).count()
+		return count+1 if settings.COUNT_HOST_IMPLICIT else count
 
 	@property
 	def get_plus_for_host(self):

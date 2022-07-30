@@ -76,6 +76,7 @@ https://docs.djangoproject.com/en/3.1/topics/email/#smtp-backend
 
 Zusätzlich:
 * `EMAIL_FROM`: E-Mail-Adresse von der aus verschickt wird
+* `COUNT_HOST_IMPLICIT`: Wenn `true` wird der Host bei Events in der Statistik automatisch mitgezählt. Wenn `false` muss er sich selbst auch als Teilnehmer eintragen, um gezählt zu werden. 
 
 
 ### Entwicklung
@@ -126,7 +127,7 @@ docker exec -it wems python manage.py createsuperuser
 ```
 
 #### settings.py
-Die Datei `WeissWurstTool/settings.py` enthält weitere Möglichkeiten zur Konfiguration des Systems:
+Die Datei `WeissWurstTool/settings.py` enthält weitere Möglichkeiten zur Konfiguration des Systems
 * `EMAIL_NEW_EVENT_SUBJECT`: Betreff der Email, die einen neuen zukünftigen Event ankündigt
 * `EMAIL_NEW_EVENT_BODY`: Text der Email, die einen neuen zukünftigen Event ankündigt
 * `EMAIL_MOD_EVENT_SUBJECT`: Betreff der Email, die die Änderung eines zukünftigen Events ankündigt

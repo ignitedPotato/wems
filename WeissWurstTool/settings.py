@@ -19,7 +19,7 @@ import environ
 env = environ.Env(
 	# set casting, default value
 	DEBUG=(bool, False),
-	WWEMS_URL=(str, "localhost"),
+	WWEMS_URL=(str, "http://localhost"),
 	USE_X_FORWARDED_HOST=(bool, False),
 	EMAIL_HOST=(str, None),
 	EMAIL_PORT=(int, None),
@@ -31,6 +31,7 @@ env = environ.Env(
 	EMAIL_TIMEOUT=(int, None),	
 	EMAIL_SSL_KEYFILE=(str, None),
 	EMAIL_SSL_CERTFILE=(str, None),
+	COUNT_HOST_IMPLICIT=(bool, True),
 )
 
 DEBUG = env('DEBUG')
@@ -54,6 +55,7 @@ EMAIL_USE_SSL = env('EMAIL_USE_SSL')
 EMAIL_TIMEOUT = env('EMAIL_TIMEOUT')
 EMAIL_SSL_KEYFILE = env('EMAIL_SSL_KEYFILE')
 EMAIL_SSL_CERTFILE = env('EMAIL_SSL_CERTFILE')
+COUNT_HOST_IMPLICIT = env('COUNT_HOST_IMPLICIT')
 
 
 # Application definition
