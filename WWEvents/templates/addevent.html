@@ -3,14 +3,10 @@
 {% block head %}
 <script>
 $(function() {
-	$.datetimepicker.setLocale('de');
-	$('input[name=date]').datetimepicker({
-		inline: true,
-		format:'d.m.Y H:i',
-		step: 15,
-		dayOfWeekStart: 1,
-		defaultSelect: false,
-		defaultTime:'12:00'
+	$('input[name=date]').flatpickr({
+		enableTime: true,
+		dateFormat:'d.m.Y H:i',
+		time_24hr: true
 	});
 	$('select.dropdown').dropdown();
 });
@@ -63,9 +59,7 @@ $(function() {
 		</div>
 		{% endif %}
 		{% csrf_token %}
-		<div class="fields">
-		<div class="one wide field"></div>
-		<div class="five wide field {% if form.date.errors %}error{% endif %}">
+		<div class="field {% if form.date.errors %}error{% endif %}">
 			<label>Datum und Zeit:</label>
 			{{ form.date }}
 			{% if form.date.errors %}
@@ -74,7 +68,7 @@ $(function() {
 				{% endfor %}
 			{% endif %}
 		</div>
-		<div class="nine wide field" style="padding-top: 20px;">
+		<div class="field" style="padding-top: 20px;">
 			<div class="field {% if form.host.errors %}error{% endif %}">
 				<label>Event hosten als:</label>
 				{{ form.host }}
@@ -94,7 +88,7 @@ $(function() {
 				{% endif %}
 			</div>
 			<div class="field" style="padding-top: 20px;">
-				<button class="ui right floated button" type="submit">Absenden</button>
+				<button class="ui submit button" type="submit">Absenden</button>
 			</div>
 		</div>
 		</div>
