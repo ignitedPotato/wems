@@ -76,7 +76,7 @@ https://docs.djangoproject.com/en/3.1/topics/email/#smtp-backend
 
 Zusätzlich:
 * `EMAIL_FROM`: E-Mail-Adresse von der aus verschickt wird
-* `COUNT_HOST_IMPLICIT`: Wenn `true` wird der Host bei Events in der Statistik automatisch mitgezählt. Wenn `false` muss er sich selbst auch als Teilnehmer eintragen, um gezählt zu werden. 
+* `COUNT_HOST_IMPLICIT`: Wenn `True` wird der Host bei Events in der Statistik automatisch mitgezählt. Wenn `False` muss er sich selbst auch als Teilnehmer eintragen, um gezählt zu werden. Default: `True`
 
 
 ### Entwicklung
