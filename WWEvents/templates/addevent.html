@@ -3,10 +3,31 @@
 {% block head %}
 <script>
 $(function() {
-	$('input[name=date]').flatpickr({
-		enableTime: true,
-		dateFormat:'d.m.Y H:i',
-		time_24hr: true
+	$('#calendar').calendar({
+		formatter: {
+			date: 'DD.MM.YYYY',
+			time: 'HH:mm',
+			cellTime: 'HH:mm',
+			datetime: 'DD.MM.YYYY HH:mm',
+			hourHeader: 'DD.MM.YYYY',
+			minuteHeader: 'DD.MM.YYYY',
+			month: 'MM.YYYY',
+		},
+		firstDayOfWeek: 1,
+		today: true,
+		showWeekNumbers: true,
+		minTimeGap: 15,
+		text: {
+			days: ['S', 'M', 'D', 'M', 'D', 'F', 'S'],
+			dayNamesShort: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
+			dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+			months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+			monthsShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+			today: 'Heute',
+			now: 'Jetzt',
+			am: 'AM',
+			pm: 'PM'
+		}
 	});
 	$('select.dropdown').dropdown();
 });
@@ -61,7 +82,9 @@ $(function() {
 		{% csrf_token %}
 		<div class="field {% if form.date.errors %}error{% endif %}">
 			<label>Datum und Zeit:</label>
-			{{ form.date }}
+			<div class="ui calendar" id="calendar">
+				{{ form.date }}
+			</div>
 			{% if form.date.errors %}
 				{% for error in form.date.errors %}
 					{{ error|escape }}

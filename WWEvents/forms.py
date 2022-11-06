@@ -12,7 +12,7 @@ class EventForm(ModelForm):
 		model = Event
 		fields = ['date', 'host', 'room']
 		widgets = {
-			'date': DateTimeInput(attrs={"required": False}),
+			'date': DateTimeInput(),
 			'host': Select(attrs={"class": "ui fluid dropdown"}),
 			'room': Select(attrs={"class": "ui fluid dropdown"}),
 		}
