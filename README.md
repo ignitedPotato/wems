@@ -16,9 +16,6 @@ In einer schicken, schlanken Web-UI können du und deine Kollegen Weißwurst-Eve
 
 Um die Verwaltung so einfach wie möglich zu halten, gibt es kein Berechtigungskonzept. Jeder kann für jeden alles eintragen. Nur das Löschen von Events und Bewertungen und die Anlage von Benutzern, Abteilungen und Räumen ist einem Admin überlassen, der Zugriff auf das Admininterface erhält.
 
-### Demo
-[🕹 Demo](https://demo.weisswurst.cloud) (wird nächtlich zurückgesetzt)
-
 ### Setup
 
 [🐳 Docker Hub](https://hub.docker.com/r/ignitedpotato/wems)
@@ -85,7 +82,6 @@ Zusätzlich:
 * Fomantic UI (https://fomantic-ui.com/)
 * Chart.js (https://www.chartjs.org/)
 * jQuery (https://jquery.com/)
-* jQuery DateTimePicker (https://github.com/xdan/datetimepicker)
 
 #### Setup
 Um das Weißwurst-Event Management System ausführen zu können, werden folgende Pakete benötigt:

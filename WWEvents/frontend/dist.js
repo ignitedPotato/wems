@@ -4,5 +4,7 @@ import './main.css';
 const jQuery = require("jquery")
 window.$ = window.jQuery = jQuery;
 
-require("chart.js")
+import Chart from 'chart.js/auto';
+window.Chart = Chart;
+
 require("fomantic-ui-css/semantic")

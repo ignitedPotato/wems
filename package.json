@@ -4,12 +4,12 @@
   "author": "Maximilian Gutwein <weisswurst@randombit.eu>",
   "license": "GPL-3.0",
   "dependencies": {
-    "chart.js": "^3.9.1",
-    "fomantic-ui-css": "^2.9.0",
+    "chart.js": "^4.2.1",
+    "fomantic-ui-css": "^2.9.2",
     "esbuild": "latest"
   },
   "resolutions": {
-    "jquery": "^3.6.1"
+    "jquery": "^3.6.3"
   },
   "scripts": {
     "build": "esbuild ./WWEvents/frontend/dist.js --bundle --minify --loader:.jpg=file --loader:.eot=file --loader:.woff=file --loader:.woff2=file --loader:.svg=file --loader:.ttf=file --outdir=WWEvents/static/dist" 

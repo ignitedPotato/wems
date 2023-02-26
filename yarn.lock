@@ -2,10 +2,17 @@
 # yarn lockfile v1
 
 
-chart.js@^3.9.1:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.9.1.tgz#3abf2c775169c4c71217a107163ac708515924b8"
-  integrity sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w==
+"@kurkle/color@^0.3.0":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@kurkle/color/-/color-0.3.2.tgz#5acd38242e8bde4f9986e7913c8fdf49d3aa199f"
+  integrity sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==
+
+chart.js@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-4.2.1.tgz#d2bd5c98e9a0ae35408975b638f40513b067ba1d"
+  integrity sha512-6YbpQ0nt3NovAgOzbkSSeeAQu/3za1319dPUQTXn9WcOpywM8rGKxJHrhS8V8xEkAlk8YhEfjbuAPfUyp6jIsw==
+  dependencies:
+    "@kurkle/color" "^0.3.0"
 
 esbuild-android-64@0.14.51:
   version "0.14.51"
@@ -133,14 +140,14 @@ esbuild@latest:
     esbuild-windows-64 "0.14.51"
     esbuild-windows-arm64 "0.14.51"
 
-fomantic-ui-css@^2.9.0:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/fomantic-ui-css/-/fomantic-ui-css-2.9.0.tgz#316773b044c33b62309deb67fefd45d4f2331da1"
-  integrity sha512-QHXz9FVLtG26m6RXyvAlhu38vZwcfAqHbKzPqWUoqsI28U/ihRlodFPTYUYgLpP7LxjlDEYVW/vkqT5veeGxNQ==
+fomantic-ui-css@^2.9.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/fomantic-ui-css/-/fomantic-ui-css-2.9.2.tgz#b445206bb0c1547ff05abbecc4725107749f7f54"
+  integrity sha512-D2KogymuA0t7z7zLoekSorgpOKil+q8y09sfYmWP1LcEA1WYRcMKdm5okjnxn4eopl8j45WBnWrkgtobNSbY2w==
   dependencies:
     jquery "^3.4.0"
 
-jquery@3.6.1, jquery@^3.4.0:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.1.tgz#fab0408f8b45fc19f956205773b62b292c147a16"
-  integrity sha512-opJeO4nCucVnsjiXOE+/PcCgYw9Gwpvs/a6B1LL/lQhwWwpbVEVYDZ1FokFr8PRc7ghYlrFPuyHuiiDNTQxmcw==
+jquery@^3.4.0, jquery@^3.6.3:
+  version "3.6.3"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.3.tgz#23ed2ffed8a19e048814f13391a19afcdba160e6"
+  integrity sha512-bZ5Sy3YzKo9Fyc8wH2iIQK4JImJ6R0GWI9kL1/k7Z91ZBNgkRXE6U0JfHIizZbort8ZunhSI3jw9I6253ahKfg==

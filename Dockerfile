@@ -7,7 +7,6 @@ RUN yarn \
 	&& rm -f yarn.lock \
 	&& rm -f package.json
 
-
 FROM python:alpine
 RUN apk add --no-cache sqlite
 
