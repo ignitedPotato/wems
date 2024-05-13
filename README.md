@@ -86,7 +86,7 @@ Zusätzlich:
 #### Setup
 Um das Weißwurst-Event Management System ausführen zu können, werden folgende Pakete benötigt:
 * python >= 3.8
-* django >= 4.0
+* django >= 5.0
 * django-environ
 * yarn
 
