@@ -6,12 +6,12 @@
   "dependencies": {
     "chart.js": "^4.4.7",
     "fomantic-ui-css": "^2.9.3",
-    "esbuild": "^0.24.2"
+    "esbuild": "^0.25.0"
   },
   "resolutions": {
     "jquery": "^3.7.1"
   },
   "scripts": {
-    "build": "esbuild ./WWEvents/frontend/dist.js --bundle --minify --loader:.jpg=file --loader:.eot=file --loader:.woff=file --loader:.woff2=file --loader:.svg=file --loader:.ttf=file --outdir=WWEvents/static/dist" 
+    "build": "esbuild ./WWEvents/frontend/dist.js --bundle --minify --loader:.jpg=file --loader:.eot=file --loader:.woff=file --loader:.woff2=file --loader:.svg=file --loader:.ttf=file --outdir=WWEvents/static/dist"
   }
 }
